@@ -16,7 +16,7 @@ public class CardDeliveryAppTest {
         $("[data-test-id=phone] input").setValue("+79335843723");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $$("[data-test-id=notification]").find(exactText("Встреча успешно забронирована на 16.12.2019")).shouldBe(visible);
+        $$("[data-test-id=notification]").find(exactText("Встреча успешно забронирована на 16.12.2019")).waitUntil(visible, 1600);
 
     }
 }
