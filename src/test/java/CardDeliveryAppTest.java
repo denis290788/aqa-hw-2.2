@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
@@ -9,14 +12,21 @@ public class CardDeliveryAppTest {
 
     @Test
     void shouldConfirmCardDelivery() throws InterruptedException {
+        Calendar instance = Calendar.getInstance();
+        Date dateNow = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
+        instance.setTime(dateNow);
+        instance.add(Calendar.DAY_OF_MONTH, 3);
+        Date confirmedDate =  instance.getTime();
+
         open("http://localhost:9999");
-        $("[data-test-id=city] input").setValue("Москва");
-        $("[data-test-id=date] input").setValue("16.12.2019");
+        $("[data-test-id=city] input").setValue("Санкт-Петербург");
+        $("[data-test-id=date] input").doubleClick().setValue(formatForDateNow.format(confirmedDate));
         $("[data-test-id=name] input").setValue("Петрова Анна");
         $("[data-test-id=phone] input").setValue("+79335843723");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $$("[data-test-id=notification]").find(exactText("Встреча успешно забронирована на 16.12.2019")).waitUntil(visible, 1600);
+        $(byText("Успешно!")).waitUntil(visible, 15000);
 
     }
 }
