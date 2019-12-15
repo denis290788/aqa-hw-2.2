@@ -16,11 +16,12 @@ public class CardDeliveryAppTest {
         Date dateNow = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
         instance.setTime(dateNow);
-        instance.add(Calendar.DAY_OF_MONTH, 3);
+        instance.add(Calendar.DAY_OF_MONTH, 4);
         Date confirmedDate =  instance.getTime();
 
         open("http://localhost:9999");
         $("[data-test-id=city] input").setValue("Санкт-Петербург");
+ //       $("[data-test-id=date] input").doubleClick().setValue("");
         $("[data-test-id=date] input").doubleClick().setValue(formatForDateNow.format(confirmedDate));
         $("[data-test-id=name] input").setValue("Петрова Анна");
         $("[data-test-id=phone] input").setValue("+79335843723");
