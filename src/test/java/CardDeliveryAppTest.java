@@ -32,24 +32,24 @@ public class CardDeliveryAppTest {
 
     }
 
-    @Test
-    void shouldConfirmCardDeliveryV2() {
-        LocalDate currentDate = LocalDate.now().plusDays(7);
-        Date date = java.sql.Date.valueOf(currentDate);
-        //корректируем на время по Гринвичу
-        long dateInMillies = date.getTime() - 3600000 * 3;
-        String dateToCatch = Long.toString(dateInMillies);
-
-        open("http://localhost:9999");
-        $("[data-test-id=city] input").setValue("Сан");
-        $$("[class=menu-item__control]").find(exactText("Санкт-Петербург")).click();
-        $("[data-test-id=date] input").click();
-        $$("[class=calendar-input__calendar-wrapper]").find(exactText(dateToCatch)).click();
-        $("[data-test-id=name] input").setValue("Петрова Анна");
-        $("[data-test-id=phone] input").setValue("+79335843723");
-        $("[data-test-id=agreement]").click();
-        $(byText("Забронировать")).click();
-        $(byText("Успешно!")).waitUntil(visible, 15000);
-
-    }
+//    @Test
+//    void shouldConfirmCardDeliveryV2() {
+//        LocalDate currentDate = LocalDate.now().plusDays(7);
+//        Date date = java.sql.Date.valueOf(currentDate);
+//        //корректируем на время по Гринвичу
+//        long dateInMillies = date.getTime() - 3600000 * 3;
+//        String dateToCatch = Long.toString(dateInMillies);
+//
+//        open("http://localhost:9999");
+//        $("[data-test-id=city] input").setValue("Сан");
+//        $$("[class=menu-item__control]").find(exactText("Санкт-Петербург")).click();
+//        $("[data-test-id=date] input").click();
+//        $$("[class=calendar-input__calendar-wrapper]").find(exactText(dateToCatch)).click();
+//        $("[data-test-id=name] input").setValue("Петрова Анна");
+//        $("[data-test-id=phone] input").setValue("+79335843723");
+//        $("[data-test-id=agreement]").click();
+//        $(byText("Забронировать")).click();
+//        $(byText("Успешно!")).waitUntil(visible, 15000);
+//
+//    }
 }
